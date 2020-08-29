@@ -10,7 +10,6 @@ const types = {
   GET_MOVIE_DETAILS_FAILED: "GET_MOVIE_DETAILS_FAILED",
   NOMINATE_MOVIE: "NOMINATE_MOVIE",
   REMOVE_NOMINATED_MOVIE: "REMOVE_NOMINATED_MOVIE",
-  SHOW_MOVIE_DETAILS: "SHOW_MOVIE_DETAILS",
 };
 
 // Actions
@@ -20,7 +19,6 @@ const fetchMovies = (searchTerm) => async (dispatch) => {
     const response = await axios.get(
       `http://www.omdbapi.com/?s=${searchTerm}&type=movie&r=json&apikey=e1592641`
     );
-    console.log(response);
     if (response.data.Error) throw new Error(response.data.Error);
     dispatch({
       type: types.FETCH_MOVIES_SUCCESS,
@@ -33,13 +31,13 @@ const fetchMovies = (searchTerm) => async (dispatch) => {
     });
   }
 };
+
 const getMovieDetails = (id) => async (dispatch) => {
   dispatch({ type: types.GET_MOVIE_DETAILS_PENDING });
   try {
     const response = await axios.get(
       `http://www.omdbapi.com/?i=${id}&type=movie&r=json&plot=short&apikey=e1592641`
     );
-    console.log(response);
     dispatch({
       type: types.GET_MOVIE_DETAILS_SUCCESS,
       payload: response.data,
@@ -50,13 +48,6 @@ const getMovieDetails = (id) => async (dispatch) => {
       err: error,
     });
   }
-};
-
-const showMovieDetails = (bool, id) => {
-  return {
-    type: types.SHOW_MOVIE_DETAILS,
-    payload: { show: bool, id },
-  };
 };
 
 const nominateMovie = (id) => ({
@@ -71,7 +62,6 @@ const removeNominatedMovie = (id) => ({
 
 export {
   fetchMovies,
-  showMovieDetails,
   nominateMovie,
   getMovieDetails,
   removeNominatedMovie,

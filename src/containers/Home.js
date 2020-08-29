@@ -1,14 +1,14 @@
 import React from "react";
-import "./Home.css";
 import { connect } from "react-redux";
-import { fetchMovies } from "../actions";
-import Movie from "../components/Movie";
+import { fetchMovies, showMovieDetails } from "../actions";
+import MovieDetail from "./MovieDetail";
 
-function MovieText({ data }) {
+function MovieText({ data, onClick }) {
   return (
     <div
       className="mt-2 flex items-center rounded py-3 px-5"
       style={{ backgroundColor: "#262630" }}
+      onClick={onClick}
     >
       <div className="">
         <h2 className="text-2xl">
@@ -23,14 +23,23 @@ function MovieText({ data }) {
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { searchTerm: "" };
+    this.state = { searchTerm: "", showDetails: false, id: null };
   }
 
   render() {
+    if (this.state.showDetails)
+      return (
+        <MovieDetail
+          id={this.state.id}
+          goBack={() => this.setState({ showDetails: false, id: null })}
+        />
+      );
+
+    if (this.props.movies.loading) return <p>Loading...</p>;
+    if (this.props.movies.err) return <p>Error</p>;
+
     return (
       <div className="" style={{ flex: 2 }}>
-        {/* {this.props.loading ? <p>Loading...</p> : null}
-        {this.props.err ? <p>Error</p> : null} */}
         <div className="flex w-1/2 mt-20 ml-10">
           <input
             className="flex-1 rounded bg-transparent appearance-none py-4 px-6 border-2 outline-none focus:outline-none focus:border-none"
@@ -44,8 +53,14 @@ class Home extends React.Component {
           />
         </div>
         <div className="ml-10 mt-5 w-1/2">
-          {this.props.data.map((movie) => (
-            <MovieText key={movie.imdbID} data={movie} />
+          {this.props.movies.data.map((movie) => (
+            <MovieText
+              key={movie.imdbID}
+              data={movie}
+              onClick={() =>
+                this.setState({ showDetails: true, id: movie.imdbID })
+              }
+            />
           ))}
         </div>
       </div>
@@ -54,9 +69,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.fetchMovies.data,
-  err: state.fetchMovies.err,
-  loading: state.fetchMovies.loading,
+  movies: state.fetchMovies,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,5 +1,4 @@
 import { types } from "./actions";
-import { act } from "react-dom/test-utils";
 
 const fetchMovies = (
   state = { loading: false, data: [], err: null },
@@ -32,22 +31,15 @@ const fetchMovies = (
 };
 
 const movieDetails = (
-  state = { loading: false, data: [], err: null, showDetails: false, id: null },
+  state = { loading: false, data: {}, err: null },
   action
 ) => {
   switch (action.type) {
-    case types.SHOW_MOVIE_DETAILS:
-      return {
-        ...state,
-        showDetails: action.payload.show,
-        id: action.payload.id,
-      };
     case types.GET_MOVIE_DETAILS_SUCCESS:
       return {
         ...state,
         data: action.payload,
         loading: false,
-        showDetails: true,
       };
 
     case types.GET_MOVIE_DETAILS_PENDING:
