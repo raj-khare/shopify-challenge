@@ -1,21 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchMovies, showMovieDetails } from "../actions";
+import { fetchMovies } from "../actions";
 import MovieDetail from "./MovieDetail";
+import AddLogo from "./add.svg";
+import { nominateMovie } from "../actions";
 
-function MovieText({ data, onClick }) {
+function MovieText({ data, showDetails, nominateMovie }) {
   return (
     <div
-      className="mt-2 flex items-center rounded py-3 px-5"
-      style={{ backgroundColor: "#262630" }}
-      onClick={onClick}
+      className="mb-1 flex justify-between items-center rounded py-3 px-5 border-2"
+      style={{ borderColor: "#262630" }}
     >
-      <div className="">
-        <h2 className="text-2xl">
+      <div>
+        <h2 className="text-xl cursor-pointer" onClick={showDetails}>
           {data.Title}
           <span className="text-xs ml-2">{data.Year}</span>
         </h2>
       </div>
+      <img
+        src={AddLogo}
+        className="h-5 cursor-pointer"
+        onClick={() => nominateMovie(data.imdbID)}
+      />
     </div>
   );
 }
@@ -39,27 +45,29 @@ class Home extends React.Component {
     if (this.props.movies.err) return <p>Error</p>;
 
     return (
-      <div className="" style={{ flex: 2 }}>
-        <div className="flex w-1/2 mt-20 ml-10">
+      <div style={{ flex: 2 }}>
+        <div className="w-1/2 mt-20 mx-auto">
           <input
-            className="flex-1 rounded bg-transparent appearance-none py-4 px-6 border-2 outline-none focus:outline-none focus:border-none"
-            style={{ borderColor: "#262630" }}
+            className=" w-full rounded py-3 px-5 border-none text-2xl font-bold outline-none focus:outline-none focus:border-none"
+            style={{ backgroundColor: "#262630" }}
             value={this.state.searchTerm}
             onChange={(e) => this.setState({ searchTerm: e.target.value })}
+            placeholder="Inception"
             onKeyDown={(e) => {
               if (e.keyCode === 13)
                 this.props.fetchMovies(this.state.searchTerm);
             }}
           />
         </div>
-        <div className="ml-10 mt-5 w-1/2">
+        <div className="mt-5 w-1/2 mx-auto">
           {this.props.movies.data.map((movie) => (
             <MovieText
               key={movie.imdbID}
               data={movie}
-              onClick={() =>
+              showDetails={() =>
                 this.setState({ showDetails: true, id: movie.imdbID })
               }
+              nominateMovie={(id) => this.props.nominateMovie(id)}
             />
           ))}
         </div>
@@ -74,6 +82,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchMovies: (searchTerm) => dispatch(fetchMovies(searchTerm)),
+  nominateMovie: (id) => dispatch(nominateMovie(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
