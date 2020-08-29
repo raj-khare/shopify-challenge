@@ -61,12 +61,23 @@ const getMovieDetails = (
   }
 };
 
-const nominateMovie = (state = { movies: [] }, action) => {
+const nominateMovie = (
+  state = {
+    nominations: [
+      {
+        title: "Cars",
+        cover:
+          "https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg",
+      },
+    ],
+  },
+  action
+) => {
   switch (action.type) {
     case types.NOMINATE_MOVIE:
       return {
         ...state,
-        movies: [...state.movies, action.payload],
+        nominations: [...state.movies, action.payload],
       };
 
     default:

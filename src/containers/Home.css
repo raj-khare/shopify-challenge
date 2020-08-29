@@ -1,11 +1,11 @@
-.home {
-  width: 60%;
+/* .home {
+  flex: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 
-.search {
+/* .search {
   background-color: #272733;
   padding: 1rem;
   border: none;
@@ -14,4 +14,4 @@
   color: inherit;
   width: 60%;
   font-size: inherit;
-}
+} */
