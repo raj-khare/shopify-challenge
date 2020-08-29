@@ -10,6 +10,7 @@ const types = {
   GET_MOVIE_DETAILS_FAILED: "GET_MOVIE_DETAILS_FAILED",
   NOMINATE_MOVIE: "NOMINATE_MOVIE",
   REMOVE_NOMINATED_MOVIE: "REMOVE_NOMINATED_MOVIE",
+  SHOW_MOVIE_DETAILS: "SHOW_MOVIE_DETAILS",
 };
 
 // Actions
@@ -51,20 +52,28 @@ const getMovieDetails = (id) => async (dispatch) => {
   }
 };
 
-const nominateMovie = (id, title) => ({
+const showMovieDetails = (bool, id) => {
+  return {
+    type: types.SHOW_MOVIE_DETAILS,
+    payload: { show: bool, id },
+  };
+};
+
+const nominateMovie = (id) => ({
   type: types.NOMINATE_MOVIE,
-  payload: { id, title },
+  payload: id,
 });
 
 const removeNominatedMovie = (id) => ({
   type: types.REMOVE_NOMINATED_MOVIE,
-  payload: { id },
+  payload: id,
 });
 
 export {
   fetchMovies,
-  getMovieDetails,
+  showMovieDetails,
   nominateMovie,
+  getMovieDetails,
   removeNominatedMovie,
   types,
 };

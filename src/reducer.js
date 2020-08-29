@@ -31,16 +31,23 @@ const fetchMovies = (
   }
 };
 
-const getMovieDetails = (
-  state = { loading: false, data: [], err: null },
+const movieDetails = (
+  state = { loading: false, data: [], err: null, showDetails: false, id: null },
   action
 ) => {
   switch (action.type) {
+    case types.SHOW_MOVIE_DETAILS:
+      return {
+        ...state,
+        showDetails: action.payload.show,
+        id: action.payload.id,
+      };
     case types.GET_MOVIE_DETAILS_SUCCESS:
       return {
         ...state,
         data: action.payload,
         loading: false,
+        showDetails: true,
       };
 
     case types.GET_MOVIE_DETAILS_PENDING:
@@ -61,15 +68,9 @@ const getMovieDetails = (
   }
 };
 
-const nominateMovie = (
+const nominations = (
   state = {
-    nominations: [
-      {
-        title: "Cars",
-        cover:
-          "https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg",
-      },
-    ],
+    movies: [],
   },
   action
 ) => {
@@ -77,7 +78,12 @@ const nominateMovie = (
     case types.NOMINATE_MOVIE:
       return {
         ...state,
-        nominations: [...state.movies, action.payload],
+        movies: [...state.movies, action.payload],
+      };
+    case types.REMOVE_NOMINATED_MOVIE:
+      return {
+        ...state,
+        movies: state.movies.filter((item) => item !== action.payload),
       };
 
     default:
@@ -85,4 +91,4 @@ const nominateMovie = (
   }
 };
 
-export { fetchMovies, getMovieDetails, nominateMovie };
+export { fetchMovies, movieDetails, nominations };

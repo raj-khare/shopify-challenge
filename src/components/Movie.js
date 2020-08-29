@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getMovieDetails } from "../actions";
+import { removeNominatedMovie } from "../actions";
 
 class Movie extends React.Component {
   render() {
@@ -18,16 +18,19 @@ class Movie extends React.Component {
     return (
       <div className="m-2">
         <img
-          src={this.props.data.cover}
+          src={`http://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
           className="object-cover w-40 h-48"
         ></img>
+        <button onClick={() => this.props.removeNominatedMovie(this.props.id)}>
+          Remove
+        </button>
       </div>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  // getMovieDetails: (id) => dispatch(getMovieDetails(id)),
+  removeNominatedMovie: (id) => dispatch(removeNominatedMovie(id)),
 });
 
 export default connect(null, mapDispatchToProps)(Movie);
