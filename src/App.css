@@ -1,12 +1,21 @@
 body {
   font-size: 16px;
-  color: #e0e0e0;
+  color: #e2e8f0;
 }
 
 .App {
   min-height: 100vh;
-  background-color: #0e1219;
+  background: linear-gradient(90deg, #000, #0f121a);
   display: flex;
   padding: 1rem;
+  padding-bottom: 10rem;
   flex-flow: row wrap;
+}
+
+.placeholder::placeholder {
+  color: #b5bbc9;
+}
+
+.img {
+  box-shadow: 0 5px 80px rgba(255, 255, 255, 0.3);
 }

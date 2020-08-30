@@ -1,29 +1,33 @@
 import React from "react";
 import { connect } from "react-redux";
 import { removeNominatedMovie } from "../actions";
+import crossSVG from "./cross.svg";
 
 class Movie extends React.Component {
   render() {
     if (this.props.placeholder)
       return (
         <div
-          className="w-40 h-48 border-solid border-2 m-2 flex items-center justify-center"
+          className="w-40 h-48 border-dashed border-2 m-2 flex items-center justify-center rounded"
           style={{ borderColor: "#262630" }}
         >
-          <p className="text-4xl" style={{ color: "#262630" }}>
+          <p className="text-2xl" style={{ color: "#262630" }}>
             {this.props.num}
           </p>
         </div>
       );
     return (
-      <div className="m-2">
+      <div className="m-2" style={{ position: "relative" }}>
         <img
           src={`http://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
-          className="object-cover w-40 h-48"
+          className="object-cover w-40 h-48 rounded"
         ></img>
-        <button onClick={() => this.props.removeNominatedMovie(this.props.id)}>
-          Remove
-        </button>
+        <img
+          src={crossSVG}
+          className="h-5 cursor-pointer"
+          onClick={() => this.props.removeNominatedMovie(this.props.id)}
+          style={{ position: "absolute", top: -7, right: -7 }}
+        />
       </div>
     );
   }
