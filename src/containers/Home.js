@@ -8,7 +8,7 @@ import searchSVG from "./search.svg";
 import errorSVG from "./error.svg";
 import ClipLoader from "react-spinners/ClipLoader";
 
-function MovieText({ data, showDetails, nominateMovie }) {
+function MovieText({ data, showDetails, nominateMovie, alreadyNominated }) {
   return (
     <div
       className="mb-1 flex justify-between items-center rounded py-3 px-5 border-2"
@@ -22,11 +22,15 @@ function MovieText({ data, showDetails, nominateMovie }) {
           </span>
         </h2>
       </div>
-      <img
-        src={plusSVG}
-        className="h-4 cursor-pointer"
-        onClick={() => nominateMovie(data.imdbID)}
-      />
+      {alreadyNominated ? (
+        <img src={plusSVG} className="h-4 opacity-50 cursor-not-allowed" />
+      ) : (
+        <img
+          src={plusSVG}
+          className="h-4 cursor-pointer"
+          onClick={() => nominateMovie(data.imdbID)}
+        />
+      )}
     </div>
   );
 }
@@ -66,6 +70,7 @@ class Home extends React.Component {
             showDetails={() =>
               this.setState({ showDetails: true, id: movie.imdbID })
             }
+            alreadyNominated={this.props.nominations.includes(movie.imdbID)}
             nominateMovie={(id) => this.props.nominateMovie(id)}
           />
         ))}
@@ -111,6 +116,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => ({
   movies: state.fetchMovies,
+  nominations: state.nominations.movies,
 });
 
 const mapDispatchToProps = (dispatch) => ({

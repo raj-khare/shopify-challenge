@@ -39,7 +39,7 @@ class MovieDetail extends React.Component {
         />
 
         <img
-          src={this.props.movieDetails.data.Poster}
+          src={`http://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
           className="img object-cover w-56 h-64 rounded"
         ></img>
 
@@ -74,15 +74,24 @@ class MovieDetail extends React.Component {
             </tr>
           </tbody>
         </table>
-        <button
-          className="text-white mt-5 font-bold py-2 px-4 border-none rounded outline-none focus:outline-none focus:border-none"
-          style={{ backgroundColor: "#262630" }}
-          onClick={() =>
-            this.props.nominateMovie(this.props.movieDetails.data.imdbID)
-          }
-        >
-          Nominate
-        </button>
+        {this.props.nominations.includes(this.props.id) ? (
+          <button
+            className="text-white mt-5 font-bold py-2 px-4 border-none rounded outline-none focus:outline-none focus:border-none opacity-50 cursor-not-allowed"
+            style={{ backgroundColor: "#262630" }}
+          >
+            Already nominated
+          </button>
+        ) : (
+          <button
+            className="text-white mt-5 font-bold py-2 px-4 border-none rounded outline-none focus:outline-none focus:border-none"
+            style={{ backgroundColor: "#262630" }}
+            onClick={() => {
+              this.props.nominateMovie(this.props.movieDetails.data.imdbID);
+            }}
+          >
+            Nominate
+          </button>
+        )}
       </div>
     );
   };
@@ -98,6 +107,7 @@ class MovieDetail extends React.Component {
 
 const mapStateToProps = (state) => ({
   movieDetails: state.movieDetails,
+  nominations: state.nominations.movies,
 });
 
 const mapDispatchToProps = (dispatch) => ({
