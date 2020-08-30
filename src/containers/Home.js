@@ -1,14 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchMovies } from "../actions";
+import { fetchMovies, removeNominatedMovie } from "../actions";
 import MovieDetail from "./MovieDetail";
 import plusSVG from "./plus.svg";
+import minusSVG from "./minus.svg";
 import { nominateMovie } from "../actions";
 import searchSVG from "./search.svg";
 import errorSVG from "./error.svg";
 import ClipLoader from "react-spinners/ClipLoader";
 
-function MovieText({ data, showDetails, nominateMovie, alreadyNominated }) {
+function MovieText({
+  data,
+  showDetails,
+  nominateMovie,
+  alreadyNominated,
+  removeNominatedMovie,
+}) {
   return (
     <div
       className="mb-1 flex justify-between items-center rounded py-3 px-5 border-2"
@@ -23,7 +30,11 @@ function MovieText({ data, showDetails, nominateMovie, alreadyNominated }) {
         </h2>
       </div>
       {alreadyNominated ? (
-        <img src={plusSVG} className="h-4 opacity-50 cursor-not-allowed" />
+        <img
+          src={minusSVG}
+          className="h-4 cursor-pointer"
+          onClick={() => removeNominatedMovie(data.imdbID)}
+        />
       ) : (
         <img
           src={plusSVG}
@@ -71,6 +82,7 @@ class Home extends React.Component {
               this.setState({ showDetails: true, id: movie.imdbID })
             }
             alreadyNominated={this.props.nominations.includes(movie.imdbID)}
+            removeNominatedMovie={this.props.removeNominatedMovie}
             nominateMovie={(id) => this.props.nominateMovie(id)}
           />
         ))}
@@ -122,6 +134,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchMovies: (searchTerm) => dispatch(fetchMovies(searchTerm)),
   nominateMovie: (id) => dispatch(nominateMovie(id)),
+  removeNominatedMovie: (id) => dispatch(removeNominatedMovie(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
