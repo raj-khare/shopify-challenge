@@ -1,17 +1,7 @@
-const axios = require("axios");
-
-// Types of action
-const types = {
-  FETCH_MOVIES_FAILED: "LOADING_MOVIES_FAILED",
-  FETCH_MOVIES_SUCCESS: "LOADING_MOVIES_SUCCESS",
-  FETCH_MOVIES_PENDING: "FETCH_MOVIES_PENDING",
-  GET_MOVIE_DETAILS_PENDING: "GET_MOVIE_DETAILS_PENDING",
-  GET_MOVIE_DETAILS_SUCCESS: "GET_MOVIE_DETAILS_SUCCESS",
-  GET_MOVIE_DETAILS_FAILED: "GET_MOVIE_DETAILS_FAILED",
-  NOMINATE_MOVIE: "NOMINATE_MOVIE",
-  REMOVE_NOMINATED_MOVIE: "REMOVE_NOMINATED_MOVIE",
-};
-
+import { toast } from "react-toastify";
+import axios from "axios";
+import store from "./store";
+import types from "./types";
 // Actions
 const fetchMovies = (searchTerm) => async (dispatch) => {
   dispatch({ type: types.FETCH_MOVIES_PENDING });
@@ -52,10 +42,24 @@ const getMovieDetails = (id) => async (dispatch) => {
   }
 };
 
-const nominateMovie = (id) => ({
-  type: types.NOMINATE_MOVIE,
-  payload: id,
-});
+const nominateMovie = (id) => (dispatch) => {
+  if (store.getState().nominations.movies.length === 5)
+    toast.warn("You have nominated 05 movies", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    });
+  else {
+    dispatch({
+      type: types.NOMINATE_MOVIE,
+      payload: id,
+    });
+  }
+};
 
 const removeNominatedMovie = (id) => ({
   type: types.REMOVE_NOMINATED_MOVIE,

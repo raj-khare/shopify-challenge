@@ -1,4 +1,4 @@
-import { types } from "./actions";
+import types from "./types";
 
 const fetchMovies = (
   state = { loading: false, data: [], err: null },
