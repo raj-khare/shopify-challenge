@@ -40,7 +40,7 @@ class MovieDetail extends React.Component {
         />
 
         <img
-          src={`http://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
+          src={`https://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
           alt="movie poster"
           className="img object-cover w-56 h-64 rounded"
         ></img>
