@@ -27,7 +27,7 @@ export const addIDtoQuery = (key, value) => {
 export const removeIDfromQuery = (key, value) => {
   const values = getIDSfromQuery(key);
   const newQsValue = qs.stringify({
-    [key]: values.filter((id) => id != value).join(","),
+    [key]: values.filter((id) => id !== value).join(","),
   });
   setQueryStringWithoutPageReload(`?${newQsValue}`);
 };

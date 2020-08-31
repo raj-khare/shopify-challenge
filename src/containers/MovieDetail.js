@@ -25,7 +25,7 @@ class MovieDetail extends React.Component {
     if (this.props.movieDetails.err)
       return (
         <div className="flex flex-col justify-center mt-32">
-          <img src={errorSVG} className="h-10" />
+          <img src={errorSVG} className="h-10" alt="Error" />
           <p className="text-center mt-3">Error!</p>
         </div>
       );
@@ -34,12 +34,14 @@ class MovieDetail extends React.Component {
       <div className="mx-auto w-3/4">
         <img
           src={backSVG}
+          alt="Go back"
           className="h-5 cursor-pointer my-5"
           onClick={this.props.goBack}
         />
 
         <img
           src={`http://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
+          alt="movie poster"
           className="img object-cover w-56 h-64 rounded"
         ></img>
 

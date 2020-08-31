@@ -46,9 +46,7 @@ class Nomination extends React.Component {
         >
           {this.state.copied ? "Copied!" : "Share"}
         </button>
-        <h1 className="uppercase tracking-wide block font-semibold">
-          N o m i n a t i o n s
-        </h1>
+        <h1 className="block text-2xl font-semibold">Nominations</h1>
         <div className="flex flex-wrap mt-5">{movies}</div>
       </div>
     );

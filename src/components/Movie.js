@@ -21,10 +21,12 @@ class Movie extends React.Component {
         <img
           src={`http://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
           className="object-cover w-40 h-48 rounded"
+          alt="movie poster"
         ></img>
         <img
           src={crossSVG}
           className="h-5 cursor-pointer"
+          alt="close button"
           onClick={() => this.props.removeNominatedMovie(this.props.id)}
           style={{ position: "absolute", top: -7, right: -7 }}
         />

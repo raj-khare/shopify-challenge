@@ -29,12 +29,14 @@ function MovieText({
       {alreadyNominated ? (
         <img
           src={minusSVG}
+          alt="Delete movie"
           className="h-4 cursor-pointer"
           onClick={() => removeNominatedMovie(data.imdbID)}
         />
       ) : (
         <img
           src={plusSVG}
+          alt="Add movie"
           className="h-4 cursor-pointer"
           onClick={() => nominateMovie(data.imdbID)}
         />
@@ -64,7 +66,8 @@ class Home extends React.Component {
     if (this.props.movies.err)
       return (
         <div className="flex flex-col justify-center mt-10">
-          <img src={errorSVG} className="h-10" />
+          <img src={errorSVG} className="h-10" alt="Error" />
+
           <p className="text-center mt-3">Error!</p>
         </div>
       );
@@ -98,12 +101,15 @@ class Home extends React.Component {
 
     return (
       <div style={{ flex: 2 }}>
-        <div className="w-1/2 mt-16 mx-auto">
+        <div className="w-1/2 mt-5 mx-auto">
+          <h1 className="uppercase tracking-wide block text-3xl font-semibold">
+            S h o p p i e s
+          </h1>
           <div
-            className="w-full rounded py-3 px-5 flex items-center"
+            className="w-full mt-10 rounded py-3 px-5 flex items-center"
             style={{ backgroundColor: "#262630" }}
           >
-            <img src={searchSVG} className="h-6" />
+            <img src={searchSVG} className="h-6" alt="Search" />
             <input
               autoFocus={true}
               className="placeholder border-none bg-transparent ml-5 flex-1 text-2xl text-white outline-none focus:outline-none focus:border-none"
