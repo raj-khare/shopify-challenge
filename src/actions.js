@@ -12,7 +12,6 @@ const fetchMovies = (searchTerm) => async (dispatch) => {
       `https://www.omdbapi.com/?s=${searchTerm}&type=movie&r=json&apikey=e1592641`
     );
     if (response.data.Error) throw new Error(response.data.Error);
-    console.log(response);
     dispatch({
       type: types.FETCH_MOVIES_SUCCESS,
       payload: response.data.Search,
@@ -31,7 +30,6 @@ const getMovieDetails = (id) => async (dispatch) => {
     const response = await axios.get(
       `https://www.omdbapi.com/?i=${id}&type=movie&r=json&plot=short&apikey=e1592641`
     );
-    console.log(response);
     dispatch({
       type: types.GET_MOVIE_DETAILS_SUCCESS,
       payload: response.data,
