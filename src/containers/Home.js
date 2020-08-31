@@ -101,7 +101,7 @@ class Home extends React.Component {
 
     return (
       <div style={{ flex: 2 }}>
-        <div className="w-1/2 mt-5 mx-auto">
+        <div className="md:w-1/2 sm:w-3/4 mt-5 mx-auto">
           <h1 className="uppercase tracking-wide block text-3xl font-semibold">
             S h o p p i e s
           </h1>
