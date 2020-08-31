@@ -62,6 +62,12 @@ class MovieDetail extends React.Component {
             </tr>
             <tr>
               <td className="block uppercase tracking-wide  text-xs font-bold w-1/4 mr-4">
+                Awards
+              </td>
+              <td className="pb-3">{this.props.movieDetails.data.Awards}</td>
+            </tr>
+            <tr>
+              <td className="block uppercase tracking-wide  text-xs font-bold w-1/4 mr-4">
                 Director
               </td>
               <td className="pb-3">{this.props.movieDetails.data.Director}</td>
@@ -71,6 +77,20 @@ class MovieDetail extends React.Component {
                 Genre
               </td>
               <td className="pb-3">{this.props.movieDetails.data.Genre}</td>
+            </tr>
+            <tr>
+              <td className="block uppercase tracking-wide  text-xs font-bold w-1/4 mr-4">
+                Released
+              </td>
+              <td className="pb-3">{this.props.movieDetails.data.Released}</td>
+            </tr>
+            <tr>
+              <td className="block uppercase tracking-wide  text-xs font-bold w-1/4 mr-4">
+                Rating
+              </td>
+              <td className="pb-3">
+                {this.props.movieDetails.data.imdbRating}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -84,7 +104,7 @@ class MovieDetail extends React.Component {
         ) : (
           <button
             className="text-white mt-5 font-bold py-2 px-4 border-none rounded outline-none focus:outline-none focus:border-none"
-            style={{ backgroundColor: "#262630" }}
+            style={{ backgroundColor: "#0687ff" }}
             onClick={() => {
               this.props.nominateMovie(this.props.movieDetails.data.imdbID);
             }}

@@ -10,12 +10,14 @@ const fetchMovies = (
         ...state,
         data: action.payload,
         loading: false,
+        err: null,
       };
 
     case types.FETCH_MOVIES_PENDING:
       return {
         ...state,
         loading: true,
+        err: null,
       };
 
     case types.FETCH_MOVIES_FAILED:
@@ -40,12 +42,14 @@ const movieDetails = (
         ...state,
         data: action.payload,
         loading: false,
+        err: null,
       };
 
     case types.GET_MOVIE_DETAILS_PENDING:
       return {
         ...state,
         loading: true,
+        err: null,
       };
 
     case types.GET_MOVIE_DETAILS_FAILED:

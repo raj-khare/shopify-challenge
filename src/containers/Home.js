@@ -17,10 +17,7 @@ function MovieText({
   removeNominatedMovie,
 }) {
   return (
-    <div
-      className="mb-1 flex justify-between items-center rounded py-3 px-5 border-2"
-      style={{ borderColor: "#262630" }}
-    >
+    <div className="mb-1 flex justify-between items-center rounded py-3 px-5 border-2 movie-text">
       <div>
         <h2 className="text-xl cursor-pointer" onClick={showDetails}>
           {data.Title}
@@ -101,7 +98,7 @@ class Home extends React.Component {
 
     return (
       <div style={{ flex: 2 }}>
-        <div className="w-1/2 mt-20 mx-auto">
+        <div className="w-1/2 mt-16 mx-auto">
           <div
             className="w-full rounded py-3 px-5 flex items-center"
             style={{ backgroundColor: "#262630" }}

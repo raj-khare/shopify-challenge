@@ -5,7 +5,7 @@ body {
 
 .App {
   min-height: 100vh;
-  background: linear-gradient(90deg, #000, #0f121a);
+  background: radial-gradient(#0f121a, #000);
   display: flex;
   padding: 1rem;
   padding-bottom: 10rem;
@@ -17,7 +17,7 @@ body {
 }
 
 .img {
-  box-shadow: 0 5px 80px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 80px rgba(255, 255, 255, 0.2);
 }
 
 .Toastify__toast--warning {
@@ -28,4 +28,12 @@ body {
 
 .Toastify__close-button {
   color: #000;
+}
+
+.movie-text {
+  border-color: #262630;
+  transition: all 0.2s ease;
+}
+.movie-text:hover {
+  border-color: #0687ff;
 }
