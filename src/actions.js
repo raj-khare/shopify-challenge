@@ -9,7 +9,7 @@ const fetchMovies = (searchTerm) => async (dispatch) => {
   dispatch({ type: types.FETCH_MOVIES_PENDING });
   try {
     const response = await axios.get(
-      `http://www.omdbapi.com/?s=${searchTerm}&type=movie&r=json&apikey=e1592641`
+      `https://www.omdbapi.com/?s=${searchTerm}&type=movie&r=json&apikey=e1592641`
     );
     if (response.data.Error) throw new Error(response.data.Error);
     console.log(response);
@@ -29,7 +29,7 @@ const getMovieDetails = (id) => async (dispatch) => {
   dispatch({ type: types.GET_MOVIE_DETAILS_PENDING });
   try {
     const response = await axios.get(
-      `http://www.omdbapi.com/?i=${id}&type=movie&r=json&plot=short&apikey=e1592641`
+      `https://www.omdbapi.com/?i=${id}&type=movie&r=json&plot=short&apikey=e1592641`
     );
     console.log(response);
     dispatch({

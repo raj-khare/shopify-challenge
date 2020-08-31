@@ -19,7 +19,7 @@ class Movie extends React.Component {
     return (
       <div className="m-2" style={{ position: "relative" }}>
         <img
-          src={`http://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
+          src={`https://img.omdbapi.com/?apikey=e1592641&i=${this.props.id}`}
           className="object-cover w-40 h-48 rounded"
           alt="movie poster"
         ></img>
